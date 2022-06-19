@@ -319,3 +319,6 @@ tags
 spybook/media/
 
 .pytest_cache/
+
+# db
+db.sqlite3
