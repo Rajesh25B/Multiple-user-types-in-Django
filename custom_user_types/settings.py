@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    # third-party apps
+    'django_extensions',
 
     # local apps
     'accounts.apps.AccountsConfig',

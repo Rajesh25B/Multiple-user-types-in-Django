@@ -25,16 +25,49 @@ class User(AbstractUser):
         return reverse("accounts:detail", kwargs={"username": self.username})
 
 
+class CustomerManager(models.Manager):
+    def get_queryset(self, *args, **kwargs):
+        return super().get_queryset(*args, **kwargs).filter(type=User.Types.CUSTOMER)
+
+
+class DriverManager(models.Manager):
+    def get_queryset(self, *args, **kwargs):
+        return super().get_queryset(*args, **kwargs).filter(type=User.Types.DRIVER)
+
+
+class StaffManager(models.Manager):
+    def get_queryset(self, *args, **kwargs):
+        return super().get_queryset(*args, **kwargs).filter(type=User.Types.STAFF)
+
+
 class Customer(User):
+    objects = CustomerManager()
     class Meta:
         proxy = True
+    
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.type = User.Types.CUSTOMER
+        return super().save(*args, **kwargs)
 
 
 class Driver(User):
+    objects = DriverManager()
     class Meta:
         proxy = True
+    
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.type = User.Types.DRIVER
+        return super().save(*args, **kwargs)
 
 
 class Staff(User):
+    objects = StaffManager()
     class Meta:
         proxy = True
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.type = User.Types.STAFF
+        return super().save(*args, **kwargs)
