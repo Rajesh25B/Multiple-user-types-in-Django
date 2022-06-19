@@ -2,13 +2,12 @@ from django.contrib.auth import get_user_model, forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
-# Importing django.forms under a special namespace because of my old mistake
 from django import forms as d_forms
 from allauth.account.forms import SignupForm
 
 User = get_user_model()
 
-# SpyBookSignupForm inherits from django-allauth's SignupForm
+# AccountSignupForm inherits from django-allauth's SignupForm
 class AccountSignupForm(SignupForm):
 
     # Specify a choice field that matches the choice field on our user model
