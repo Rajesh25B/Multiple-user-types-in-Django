@@ -1,0 +1,25 @@
+<div class="container">
+    {%csrf_token%}
+      {% if request.user.is_authenticated %}
+      <h2>Name: {{ request.user.username }}</h2>
+        <h3>Role: {{ request.user.type }}</h3>
+      {% endif %}
+    </div>
+  </div>
+
+{% if object == request.user.user %}
+<!-- Action buttons -->
+<div class="row">
+
+  <div class="col-sm-12">
+    
+    <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-Mail</a>
+    <a class="btn btn-primary" href="{% url 'account_logout' %}" role="button">Logout</a>
+    <a class="btn btn-primary" href="{% url 'account_profile' %}" role="button">Profile</a>
+    <!-- Your Stuff: Custom user template urls -->
+  </div>
+
+</div>
+<!-- End Action buttons -->
+{% endif %}
+</div>
